@@ -15,7 +15,7 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build("christopherboakye15@gmail.com/react-app")
+                    app = docker.build("chrisboakye/react-app")
                     app.inside {
                         sh 'echo $(curl localhost:1233)'
                     }
@@ -41,14 +41,14 @@ pipeline {
             }
             steps {
                     script {
-                        sh "docker pull christopherboakye15@gmail.com/react-app:${env.BUILD_NUMBER}"
+                        sh "docker pull chrisboakye/react-app:${env.BUILD_NUMBER}"
                         try {
                             sh "docker stop react-app"
                             sh "docker rm react-app"
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "docker run --restart always --name react-app -p 1233:80 -d christopherboakye15@gmail.com/react-app:${env.BUILD_NUMBER}"
+                        sh "docker run --restart always --name react-app -p 1233:80 -d chrisboakye/react-app:${env.BUILD_NUMBER}"
                     }
             }
         }
@@ -80,14 +80,14 @@ pipeline {
                 input 'Does the staging environment look OK? Did You get 200 response?'
                  milestone(1)
                     script {
-                        sh "docker pull christopherboakye15@gmail.com/react-app:${env.BUILD_NUMBER}"
+                        sh "docker pull chrisboakye/react-app:${env.BUILD_NUMBER}"
                         try {
                             sh "docker stop react-app"
                             sh "docker rm react-app"
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "docker run --restart always --name react-app -p 1233:80 -d christopherboakye15@gmail.com/react-app:${env.BUILD_NUMBER}"
+                        sh "docker run --restart always --name react-app -p 1233:80 -d chrisboakye/react-app:${env.BUILD_NUMBER}"
                     }
             }
         }
